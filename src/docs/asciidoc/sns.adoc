@@ -1,0 +1,50 @@
+= Keepon 서버 SNS연동 API
+ohjy<dibtp1221@gmail.com>
+1.0.0, 01/18/2022
+:toc: left
+:sectnums:
+
+//이렇게 하면 표를 만들 수 있다.
+|===
+| Method | Content
+
+| `GET`
+| 읽기
+
+| `POST`
+| 추가, 수정
+|===
+
+== POST 회원가입
+=== HTTP Request
+include::{snippets}/signUpNaver/http-request.adoc[]
+//여기서 스니펫을 이용해서 어떻게 작성하면 되는지 보여줌
+// {snippets} 는 스니펫이 있는 경로로 build/generated-snippets 를 의미
+
+=== request parameter
+include::{snippets}/signUpNaver/request-fields.adoc[]
+
+=== HTTP Response (신규회원의 경우)
+include::{snippets}/signUpNaver/http-response.adoc[]
+
+=== HTTP Response (기가입 회원의 경우)
+include::{snippets}/signUpNaver_exists/http-response.adoc[]
+
+
+== POST 로그인
+=== HTTP Request
+include::{snippets}/signInNaver_jwt/http-request.adoc[]
+//여기서 스니펫을 이용해서 어떻게 작성하면 되는지 보여줌
+// {snippets} 는 스니펫이 있는 경로로 build/generated-snippets 를 의미
+
+=== request parameter
+include::{snippets}/signInNaver_jwt/request-fields.adoc[]
+
+=== HTTP Response (가입 성공시, API 호출을 위한 JWT 토큰 응답)
+include::{snippets}/signInNaver_jwt/http-response.adoc[]
+
+=== HTTP Response (회원 존재하지 않는 경우)
+include::{snippets}/signInNaver_noUser/http-response.adoc[]
+
+=== HTTP Response (accessToken 잘못된 경우)
+include::{snippets}/signInNaver_error/http-response.adoc[]

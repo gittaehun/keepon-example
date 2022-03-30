@@ -1,0 +1,96 @@
+= Keepon 쿠폰 API
+kth<kktthh07@gmail.com>, ohjy<dibtp1221@gmail.com>
+1.0.0, 30/01/2022
+:toc: left
+:sectnums:
+
+== POST 쿠폰 ocr
+=== HTTP Request
+include::{snippets}/coupon_ocr/curl-request.adoc[]
+//여기서 스니펫을 이용해서 어떻게 작성하면 되는지 보여줌
+// {snippets} 는 스니펫이 있는 경로로 build/generated-snippets 를 의미
+
+=== HTTP Response 설명
+include::{snippets}/coupon_ocr/response-fields.adoc[]
+
+=== HTTP Response
+include::{snippets}/coupon_ocr/http-response.adoc[]
+
+== Get 쿠폰 리스트 조회
+=== HTTP Request
+include::{snippets}/coupons/curl-request.adoc[]
+
+=== HTTP Response 설명
+include::{snippets}/coupons/response-fields.adoc[]
+
+=== HTTP Response(쿠폰 데이터 있는경우)
+include::{snippets}/coupons/http-response.adoc[]
+
+=== HTTP Response(쿠폰 데이터 없는경우)
+include::{snippets}/coupons_not_found/http-response.adoc[]
+
+== POST 쿠폰 저장
+=== HTTP Request
+include::{snippets}/success_save/curl-request.adoc[]
+
+=== HTTP Response 설명
+include::{snippets}/success_save/response-fields.adoc[]
+
+=== HTTP Response(쿠폰 저장 success)
+include::{snippets}/success_save/http-response.adoc[]
+
+=== HTTP Response(쿠폰 중복 저장인 경우)
+include::{snippets}/duplicate_save/http-response.adoc[]
+
+== POST 쿠폰 상세 조회
+=== HTTP Request
+include::{snippets}/coupon_exist/curl-request.adoc[]
+
+=== HTTP Response 설명
+include::{snippets}/coupon_exist/response-fields.adoc[]
+
+=== HTTP Response(쿠폰 상세 존재)
+include::{snippets}/coupon_exist/http-response.adoc[]
+
+=== HTTP Response(쿠폰 상세 미존재)
+include::{snippets}/coupon_not_exist/http-response.adoc[]
+
+== POST 쿠폰 수정
+=== HTTP Request
+include::{snippets}/update_coupon_success/curl-request.adoc[]
+
+=== HTTP Response 설명
+include::{snippets}/update_coupon_success/response-fields.adoc[]
+
+=== HTTP Response(쿠폰 수정 정상)
+include::{snippets}/update_coupon_success/http-response.adoc[]
+
+=== HTTP Response(쿠폰 수정 실패)
+include::{snippets}/update_coupon_fail/http-response.adoc[]
+
+== POST 쿠폰 사용여부 수정
+=== HTTP Request
+include::{snippets}/use_yn_success/curl-request.adoc[]
+
+=== HTTP Response 설명
+include::{snippets}/use_yn_success/response-fields.adoc[]
+
+=== HTTP Response(쿠폰 사용여부 정상)
+include::{snippets}/use_yn_success/http-response.adoc[]
+
+=== HTTP Response(쿠폰 사용여부 실패)
+include::{snippets}/use_yn_fail/http-response.adoc[]
+
+== POST 쿠폰 삭제
+=== HTTP Request
+include::{snippets}/delete_coupon_success/curl-request.adoc[]
+
+=== HTTP Response 설명
+include::{snippets}/use_yn_success/response-fields.adoc[]
+
+=== HTTP Response(쿠폰 삭제 정상)
+include::{snippets}/delete_coupon_success/http-response.adoc[]
+
+=== HTTP Response(쿠폰 삭제 실패)
+include::{snippets}/delete_coupon_fail/http-response.adoc[]
+

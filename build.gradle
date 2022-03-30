@@ -1,0 +1,82 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "org.asciidoctor.jvm.convert" version '3.3.2'
+	id 'java'
+}
+
+group = 'bside'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+ext {
+	snippetsDir = file('build/generated-snippets')
+}
+
+bootJar {
+	dependsOn asciidoctor
+	copy {
+		from "${asciidoctor.outputDir}"            // /html5를 사용하지 않는다!
+		into 'src/main/resources/static/docs'    // /static/docs로 복사!
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	asciidoctorExtensions
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation 'org.json:json:20190722'
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	// JWT 관련 라이브러리들 추가!!
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+	//mariadb추가
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0")
+
+	//스프링부트 버전이 올라감에 따라 junit의 지원도 4->5로 바뀐거에 따라 junit4 쓰기위한 설정 추가
+	testImplementation("org.junit.vintage:junit-vintage-engine") {
+		exclude group: "org.hamcrest", module: "hamcrest-core"
+	}
+
+	implementation 'org.springframework.cloud:spring-cloud-gcp-dependencies:1.2.8.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-vision:1.2.8.RELEASE'
+}
+
+test {
+	useJUnitPlatform()
+	outputs.dir snippetsDir
+}
+
+asciidoctor {
+	configurations 'asciidoctorExtensions'
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+asciidoctor.doFirst {
+	delete file('src/main/resources/static/docs')
+}
